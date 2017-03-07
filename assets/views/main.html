@@ -1,14 +1,20 @@
 <div class="header">
-  <h3 class="text-muted">chatty</h3>
+    <h3 class="text-muted">chatty</h3>
 </div>
 
 <h4>Latest Chats:</h4>
 <div class="jumbotron">
 
-	<form ng-submit="addMessage(newMessage)">
-		<input ng-model="newMessage" type="text" placeholder="Hello!">
-	</form>
+    <form ng-submit="addMessage(newMessage,user, image)" ng-keydown='$event.which === 13 && addMessage(newMessage, user, image)'>
+        <input type="text" style='width:100%' ng-model='image' placeholder="image url">
+        </br>
+        <input type="text" ng-model='user' value="anon" placeholder="user name">
+        <br>
+        <input style='width:100%' ng-model="newMessage" type="text" placeholder="Hello!">
+    </form>
 
-	<div ng-repeat="message in messages track by $index">{{ message }}</div>
+    <div ng-repeat="message in messages track by $index">
+        <img ng-src="{{message.image}}" style='max-height:100px;display:inline-block;max-width:100px;' alt="">
+        <h3 style="display:inline-block">{{message.user}}</h3> {{ message.message }} <cite style="opacity:.3">-{{message.time | date:'hh:mm a'}}<cite></div>
 
 </div>
